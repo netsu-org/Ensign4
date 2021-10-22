@@ -5,7 +5,7 @@ class load {
         this.config = require('./system/config/system.json')
     }
     async load(dir){
-        new(require(dir))(this)
+        require(dir)
     }
     async initialize(){
         const dir = fs.readdirSync("./service")
@@ -14,6 +14,7 @@ class load {
                 await this.load(`./service/${h}`)
             }
             catch(err){
+                console.log(err)
                 console.log(`Failed to load ${h} (${err})`)
             }
         }
