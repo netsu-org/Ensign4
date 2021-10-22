@@ -16,7 +16,7 @@ class dbot extends discord.Client{
     async initialize(){
         if(!this.config) throw new Error("No config file found")
         try{
-            bot.login(this.config.bot.token)
+            this.login(this.config.bot.token)
         }
         catch(err){
             console.log("Invalid token")
@@ -24,7 +24,11 @@ class dbot extends discord.Client{
         }
         const events = fs.readdirSync(this.config.bot.eventsLocation)
         for(const event of events){
-            console.log(event)
+            const name = event.split(".")[0]
+            const evt = new(require(`../system/events/${name}`))(this)
+
+            this.on(name,(...args) => evt.run(...args))
+            delete require.cache[require.resolve(`../system/events/${name}`)]
         }
     }
 }
