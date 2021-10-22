@@ -14,7 +14,6 @@ class load {
                 await this.load(`./service/${h}`)
             }
             catch(err){
-                console.log(err)
                 console.log(`Failed to load ${h} (${err})`)
             }
         }
@@ -23,10 +22,9 @@ class load {
 
     }
     locate(dir){
-        return fs.readFileSync(dir) ? true : null
+        return fs.readFileSync(dir) ? true : false
     }
 }
 
-new load().initialize()
-
 module.exports = load
+new load().initialize()

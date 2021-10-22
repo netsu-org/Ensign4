@@ -1,0 +1,7 @@
+{
+    "bot":{
+        "token":null,
+        "eventsLocation":"./system/events",
+        "programsLocation":"./programs"
+    }
+}

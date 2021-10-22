@@ -1,24 +1,37 @@
 const discord = require('discord.js')
-const sys = new(require('../index.js'))
-
+const fs = require('fs')
 class dbot extends discord.Client{
-    constructor(bot){
-        super(bot)
-        this.config = sys.locate('./system/config/bot.json') ? require('./system/config/bot.json') : null
+   constructor(options){
+        super(options)
+        this.config = require('../system/config/bot.json')
         this.sysMain = {
             loadPrograms: () =>{
 
             },
-            loadModule: () =>{
+            loadModules: () =>{
 
             }
         }
     }
     async initialize(){
-
+        if(!this.config) throw new Error("No config file found")
+        try{
+            bot.login(this.config.bot.token)
+        }
+        catch(err){
+            console.log("Invalid token")
+            process.exit()
+        }
+        const events = fs.readdirSync(this.config.bot.eventsLocation)
+        for(const event of events){
+            console.log(event)
+        }
     }
 }
 
 
 
 const app = new dbot()
+
+
+app.initialize()
