@@ -2,6 +2,7 @@ const fs = require('fs')
 class load {
     constructor(file){
         this.tempFile = {}
+        this.config = require('./system/config/system.json')
     }
     async load(dir){
         new(require(dir))(this)
@@ -13,9 +14,16 @@ class load {
                 await this.load(`./service/${h}`)
             }
             catch(err){
+                console.log(err)
                 console.log(`Failed to load ${h} (${err})`)
             }
         }
+    }
+    async backup(file){
+
+    }
+    locate(dir){
+        return fs.readFileSync(dir) ? true : null
     }
 }
 

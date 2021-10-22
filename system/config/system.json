@@ -1,0 +1,4 @@
+{
+    "baseLocation":"@System:@LocateFile",
+    "backupLocation":"./system/backup"
+}
